@@ -1,31 +1,56 @@
-import nodemailer from 'nodemailer';
+import nodemailer from "nodemailer"
+import dotenv from "detenv"
 
-export const prerender = false;
+dotenv.cofig()
+export const prerender = false // Asegurar que el endpoint se ejecute en el servidor
 
-export async function post(req, res) {
-  const { name, email, message } = req.body;
+export async function POST({ request }) {
+    const { name, email, message } = await request.json()
 
-  const transporter = nodemailer.createTransport({
-    service: 'smtp.mailtrap.io',
-    auth: {
-      user: process.env.MAILTRAP_USER,  
-      pass: pocess.env.MAILTRAP_PASS,    },
-  });
+    if (!name || !email || !message) {
+        console.error("❌ Datos incompletos")
+        return new Response(JSON.stringify({ message: "Datos incompletos" }), {
+            status: 400,
+            headers: { "Content-Type": "application/json" },
+        })
+    }
 
-  const mailOptions = {
-    from: email,
-    to: 'your_email@example.com', 
-    subject: `Nuevo mensaje de ${name}`,
-    text: message,
-    html: `<p>Nuevo mensaje de ${name}</p><p>Email: ${email}</p><p>Mensaje: ${message}</p>`,
-  };
+    console.log("📥 Datos recibidos:", { name, email, message })
 
-  try {
-    await transporter.sendMail(mailOptions);
-    res.status(200).json({ message: 'Mensaje enviado correctamente' });
-  } catch (error) {
-    console.error(error);
-    res.status(500).json({ message: 'Error al enviar el mensaje' });
-  }
+    const transporter = nodemailer.createTransport({
+        host: "sandbox.smtp.mailtrap.io",
+        port: 2525,
+        auth: {
+            user: process.env.MAILTRAP_USER,
+            pass: process.env.MAILTRAP_PASS,
+        },
+    })
+
+    const mailOptions = {
+        from: `"${name}" <${email}>`,
+        to: "tu_email@ejemplo.com",
+        subject: `Nuevo mensaje de ${name}`,
+        html: `<p><strong>Nombre:</strong> ${name}</p><p><strong>Email:</strong> ${email}</p><p>${message}</p>`,
+    }
+
+    try {
+        await transporter.sendMail(mailOptions)
+        console.log("✅ Correo enviado correctamente")
+        return new Response(
+            JSON.stringify({ message: "Correo enviado correctamente" }),
+            {
+                status: 200,
+                headers: { "Content-Type": "application/json" },
+            },
+        )
+    } catch (err) {
+        console.error("❌ Error al enviar correo:", err)
+        return new Response(
+            JSON.stringify({ message: "Error al enviar el correo" }),
+            {
+                status: 500,
+                headers: { "Content-Type": "application/json" },
+            },
+        )
+    }
 }
-

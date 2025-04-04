@@ -1,9 +1,19 @@
-import { defineConfig } from "astro/config";
-import tailwindcss from "@tailwindcss/vite";
+import { defineConfig } from "astro/config"
+import tailwindcss from "@tailwindcss/vite"
+import node from "@astrojs/node"
+
+import react from "@astrojs/react";
 
 export default defineConfig({
   vite: {
-    plugins: [tailwindcss()],
+      plugins: [tailwindcss()],
   },
-    output:'server',
-});
+
+  output: "server",
+
+  adapter: node({
+      mode: "middleware",
+  }),
+
+  integrations: [react()],
+})
