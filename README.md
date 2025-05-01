@@ -1,5 +1,5 @@
 # Astro Starter Kit: Basics
-
+# crear portafolio con astro
 ```sh
 npm create astro@latest -- --template basics
 ```
