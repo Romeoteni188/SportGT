@@ -1,2 +1,233 @@
+@import url("https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700&display=swap");
+@import "@fortawesome/fontawesome-free/css/all.min.css";
 @import "tailwindcss";
-@plugin "daisyui";
+@plugin "daisyui" {
+    /* themes: light ---default; */
+    themes: [ "light"];
+}
+
+body {
+    font-family: "Montserrat", sans-serif;
+}
+.montserrat {
+    font-family: "Montserrat", sans-serif;
+}
+
+@plugin "daisyui/theme" {
+    name: "light";
+    color-scheme: light;
+    default: true;
+
+    --color-primary: #000d2f;
+    --color-primary-content: #f1f5f9;
+    --color-neutral: #06b6d4;
+    --color-info: #0a1228;
+    --color-info-content: #0a1228;
+
+    --color-secondary: #86b916;
+    --color-secondary-content: #0284c7;
+    --color-success: #0e7490;
+    --color-accent: #ffffff;
+    --color-accent-content: #0284c7;
+}
+
+/* Modo oscuro */
+@plugin "daisyui/theme" {
+    name: "dark";
+    color-scheme: dark;
+
+    --color-primary: #0284c7;
+    --color-primary-content: #e0f2fe;
+    --color-neutral: #ffffff;
+    --color-secondary: #ffffff;
+    --color-secondary-content: #93c5fd;
+    --color-success: #ffffff;
+    --color-accent: #172554;
+    --color-accent-content: #93c5fd;
+}
+
+@custom-variant dark (&:where([data-theme=dark], [data-theme=dark] *));
+
+/* Estilos para botones */
+/* .btn-primary { */
+/*     background-color: var(--color-primary); */
+/*     color: var(--color-primary-content); */
+/* } */
+/**/
+/* .btn-secondary { */
+/*     background-color: var(--color-secondary); */
+/*     color: var(--color-secondary-content); */
+/* } */
+/**/
+/* .btn-accent { */
+/*     background-color: var(--color-accent); */
+/*     color: var(--color-accent-content); */
+/* } */
+
+@keyframes nube {
+    0%,
+    100% {
+        transform: translateY(0);
+    }
+    50% {
+        transform: translateY(-10px);
+    }
+}
+
+@keyframes slideJumpCenter {
+    0% {
+        transform: translateX(-100%) scale(0.8);
+        opacity: 0;
+    }
+    50% {
+        transform: translateX(10%) scale(1.1);
+        opacity: 1;
+    }
+    70% {
+        transform: translateX(-5%) scale(1);
+    }
+    100% {
+        transform: translateX(0) scale(1);
+    }
+}
+
+@keyframes foldImage {
+    0% {
+        transform: perspective(500px) rotateX(0deg);
+    }
+    50% {
+        transform: perspective(500px) rotateX(80deg);
+        opacity: 0.7;
+    }
+    100% {
+        transform: perspective(500px) rotateX(0deg);
+    }
+}
+/* efecto templor */
+@keyframes glitch {
+    0% {
+        transform: translate(0);
+    }
+    25% {
+        transform: translate(-2px, 2px);
+    }
+    50% {
+        transform: translate(2px, -2px);
+    }
+    75% {
+        transform: translate(-2px, 2px);
+    }
+    100% {
+        transform: translate(0);
+    }
+}
+
+/* giro para los lados  */
+
+@keyframes flip {
+    0% {
+        transform: rotateY(0);
+    }
+    50% {
+        transform: rotateY(180deg);
+    }
+    100% {
+        transform: rotateY(360deg);
+    }
+}
+
+@keyframes crumple {
+    0% {
+        transform: scale(1);
+        filter: none;
+    }
+    50% {
+        transform: scale(0.1, 0.1) rotate(20deg);
+        filter: blur(5px) brightness(0.5);
+        border-radius: 50%;
+    }
+    100% {
+        transform: scale(1);
+        filter: none;
+        border-radius: 0;
+    }
+}
+
+/* animacion de escrir uno por uno el width era el 100% */
+@keyframes typing {
+    0% {
+        width: 0;
+    }
+    50% {
+        width: 50%;
+    }
+    100% {
+        width: 100%;
+    }
+}
+
+@keyframes blink {
+    50% {
+        border-color: transparent;
+    }
+}
+
+.typing {
+    display: inline-block;
+    font-size: 2rem;
+    white-space: nowrap;
+    overflow: hidden;
+    border-right: 0px solid;
+    width: 0;
+    animation:
+        typing 3s steps(8, end) infinite alternate,
+        blink 0.7s infinite;
+    animation-delay: 0s, 3s; /* La pausa se maneja con "alternate" */
+    animation-fill-mode: both;
+}
+@keyframes slide {
+    0% {
+        transform: translateX(0);
+    }
+    100% {
+        transform: translateX(-50%);
+    }
+}
+
+.crumple {
+    animation: crumple 3s ease-in-out infinite;
+}
+
+.flip {
+    animation: flip 4s ease-in-out infinite;
+}
+
+.glitch {
+    animation-delay: 3s;
+    animation: glitch 0.1s linear infinite;
+}
+
+.slide-jump {
+    animation: slideJumpCenter 1s ease-out forwards;
+    animation-delay: 1s; /* Retraso antes de iniciar la animación */
+    /* animation-iteration-count: infinite; */
+    animation-iteration-count: 1;
+    animation-duration: 2s;
+    /* animation-fill-mode: both; */
+    animation-fill-mode: forwards;
+}
+
+.nube {
+    animation: nube 3s ease-in-out infinite;
+}
+
+.fold {
+    display: inline-block;
+    animation: foldImage 3s ease-in-out infinite;
+    transform-origin: bottom;
+}
+
+/* animacion para el carrosel */
+.animate-slide {
+    animation: slide 7s linear infinite;
+}
