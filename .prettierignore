@@ -1,2 +1,5 @@
 pnpm-lock.yaml
 flake.lock
+node_modules
+dist
+build

@@ -3,29 +3,33 @@ import Layout from "../layouts/Layout.astro";
 
 import ProductCard from "../components/ProductCard.astro";
 
-const id = Astro.url.pathname.split('/').pop();
+const id = Astro.url.pathname.split("/").pop();
 const productos = [
-  { id: 1, nombre: "Nike Air Max", precio: "$120", imagen: "/uno.png" },
-  { id: 2, nombre: "Adidas Ultraboost", precio: "$140", imagen: "/dos.png" },
-  { id: 3, nombre: "Puma RS-X", precio: "$110", imagen: "/tres.png" },
-  { id: 4, nombre: "Nike Air ", precio: "$120", imagen: "/cuatro.png" },
-  { id: 5, nombre: "Adidas && puma", precio: "$140", imagen: "/cinco.png" },
-  { id: 6, nombre: "Pokemon", precio: "$110", imagen: "/seis.png" },
-
+    { id: 1, nombre: "Nike Air Max", precio: "$120", imagen: "/uno.png" },
+    { id: 2, nombre: "Adidas Ultraboost", precio: "$140", imagen: "/dos.png" },
+    { id: 3, nombre: "Puma RS-X", precio: "$110", imagen: "/tres.png" },
+    { id: 4, nombre: "Nike Air ", precio: "$120", imagen: "/cuatro.png" },
+    { id: 5, nombre: "Adidas && puma", precio: "$140", imagen: "/cinco.png" },
+    { id: 6, nombre: "Pokemon", precio: "$110", imagen: "/seis.png" },
 ];
 const producto = productos[id];
 ---
+
 <Layout>
     <section class="container mx-auto px-4 py-10">
         <div class="flex items-center justify-between mb-6">
             <a class="btn btn-primary" href="/">Regresar</a>
-        <h1 class="text-3xl font-bold text-center mb-6">Nuestros Zapatos</h1>
+            <h1 class="text-3xl font-bold text-center mb-6">
+                Nuestros Zapatos
+            </h1>
             <a class="btn btn-accent" href="/">Carrito</a>
         </div>
-    <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
-      {productos.map((producto) => (
-        <ProductCard key={producto.id} producto={producto} />
-      ))}
-    </div>
-  </section>
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+            {
+                productos.map((producto) => (
+                    <ProductCard key={producto.id} producto={producto} />
+                ))
+            }
+        </div>
+    </section>
 </Layout>

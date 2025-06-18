@@ -1,55 +1,75 @@
 ---
+
 ---
+
 <div class="relative min-h-screen w-full bg-gray-800">
-  <!-- Imagen de fondo -->
-  <div class="absolute inset-0 bg-cover bg-center" style="background-image: url('/assets/pokemon.jpg');">
-        <div class="flex items-center justify-center h-full bg-black bg-opacity-50">
-
-      <div class="text-center text-white px-6">
-        <h1 class="text-4xl sm:text-5xl lg:text-6xl font-bold mb-4">
-          ¡Oferta de un día! <span class="text-yellow-500">50% de descuento en todos los zapatos</span>
-        </h1>
-        <p class="text-lg sm:text-xl mb-8">Los mejores zapatos para cualquier momento</p>
-        <a href="#" class="inline-block bg-yellow-500 text-white px-8 py-3 rounded-full text-lg font-semibold hover:bg-yellow-600 transition duration-300">
-          ¡Aprovecha la oferta!
-        </a>
-      </div>
+    <!-- Imagen de fondo -->
+    <div
+        class="absolute inset-0 bg-cover bg-center"
+        style="background-image: url('/assets/pokemon.jpg');"
+    >
+        <div
+            class="flex items-center justify-center h-full bg-black bg-opacity-50"
+        >
+            <div class="text-center text-white px-6">
+                <h1 class="text-4xl sm:text-5xl lg:text-6xl font-bold mb-4">
+                    ¡Oferta de un día! <span class="text-yellow-500"
+                        >50% de descuento en todos los zapatos</span
+                    >
+                </h1>
+                <p class="text-lg sm:text-xl mb-8">
+                    Los mejores zapatos para cualquier momento
+                </p>
+                <a
+                    href="#"
+                    class="inline-block bg-yellow-500 text-white px-8 py-3 rounded-full text-lg font-semibold hover:bg-yellow-600 transition duration-300"
+                >
+                    ¡Aprovecha la oferta!
+                </a>
+            </div>
+        </div>
     </div>
-  </div>
 
-  <div class="relative text-center py-8 z-10">
+    <div class="relative text-center py-8 z-10">
         <p class="text-gray-400 text-xl hover:text-white">El tiempo se agota</p>
-    <h1 class="text-4xl sm:text-5xl lg:text-6xl font-bold mb-4 text-white">
-      ¡Oferta termina en: <span id="countdown" class="text-yellow-500">00:00:00</span>!
-    </h1>
-  </div>
+        <h1 class="text-4xl sm:text-5xl lg:text-6xl font-bold mb-4 text-white">
+            ¡Oferta termina en: <span id="countdown" class="text-yellow-500"
+                >00:00:00</span
+            >!
+        </h1>
+    </div>
 </div>
 
 <script>
-  function startCountdown(durationInSeconds) {
-    let countdownElement = document.getElementById("countdown");
-    let endTime = Date.now() + durationInSeconds * 1000;
+    function startCountdown(durationInSeconds) {
+        let countdownElement = document.getElementById("countdown");
+        let endTime = Date.now() + durationInSeconds * 1000;
 
-    function updateCountdown() {
-      let now = Date.now();
-      let remainingTime = Math.max(0, Math.floor((endTime - now) / 1000));
+        function updateCountdown() {
+            let now = Date.now();
+            let remainingTime = Math.max(0, Math.floor((endTime - now) / 1000));
 
-      let hours = String(Math.floor(remainingTime / 3600)).padStart(2, "0");
-      let minutes = String(Math.floor((remainingTime % 3600) / 60)).padStart(2, "0");
-      let seconds = String(remainingTime % 60).padStart(2, "0");
+            let hours = String(Math.floor(remainingTime / 3600)).padStart(
+                2,
+                "0",
+            );
+            let minutes = String(
+                Math.floor((remainingTime % 3600) / 60),
+            ).padStart(2, "0");
+            let seconds = String(remainingTime % 60).padStart(2, "0");
 
-      countdownElement.textContent = `${hours}:${minutes}:${seconds}`;
+            countdownElement.textContent = `${hours}:${minutes}:${seconds}`;
 
-      if (remainingTime > 0) {
-        requestAnimationFrame(updateCountdown);
-      } else {
-        countdownElement.textContent = "¡Oferta terminada!";
-      }
+            if (remainingTime > 0) {
+                requestAnimationFrame(updateCountdown);
+            } else {
+                countdownElement.textContent = "¡Oferta terminada!";
+            }
+        }
+
+        updateCountdown();
     }
 
-    updateCountdown();
-  }
-
-  // Inicia el contador con 24 horas (24 * 60 * 60 segundos)
-  startCountdown(24 * 60 * 60);
+    // Inicia el contador con 24 horas (24 * 60 * 60 segundos)
+    startCountdown(24 * 60 * 60);
 </script>

@@ -1,39 +1,57 @@
 ---
+
 ---
+
 <script client:load>
-  const handleSubmit = async (e) => {
-    e.preventDefault();
-    const form = e.target;
-    const data = Object.fromEntries(new FormData(form));
+    const handleSubmit = async (e) => {
+        e.preventDefault();
+        const form = e.target;
+        const data = Object.fromEntries(new FormData(form));
 
-    console.log('📤 Datos enviados al backend:', data); // Ver los datos en la consola del navegador
+        console.log("📤 Datos enviados al backend:", data); // Ver los datos en la consola del navegador
 
-    try {
-      const res = await fetch('/api/send-email', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify(data),
-      });
+        try {
+            const res = await fetch("/api/send-email", {
+                method: "POST",
+                headers: { "Content-Type": "application/json" },
+                body: JSON.stringify(data),
+            });
 
-      if (res.ok) {
-        alert('Mensaje enviado');
-        form.reset();
-      } else {
-        const error = await res.json();
-        alert(error.message || 'Error al enviar');
-      }
-    } catch (err) {
-      console.error(err);
-      alert('Error al conectar con el servidor');
-    }
-  };
+            if (res.ok) {
+                alert("Mensaje enviado");
+                form.reset();
+            } else {
+                const error = await res.json();
+                alert(error.message || "Error al enviar");
+            }
+        } catch (err) {
+            console.error(err);
+            alert("Error al conectar con el servidor");
+        }
+    };
 
-  document.querySelector('form')?.addEventListener('submit', handleSubmit);
+    document.querySelector("form")?.addEventListener("submit", handleSubmit);
 </script>
 
 <form class="space-y-4">
-  <input type="text" name="name" placeholder="Nombre" class="input input-bordered w-full" required />
-  <input type="email" name="email" placeholder="Correo" class="input input-bordered w-full" required />
-  <textarea name="message" placeholder="Mensaje" class="textarea textarea-bordered w-full" required></textarea>
-  <button type="submit" class="btn btn-primary w-full">Enviar</button>
+    <input
+        type="text"
+        name="name"
+        placeholder="Nombre"
+        class="input input-bordered w-full"
+        required
+    />
+    <input
+        type="email"
+        name="email"
+        placeholder="Correo"
+        class="input input-bordered w-full"
+        required
+    />
+    <textarea
+        name="message"
+        placeholder="Mensaje"
+        class="textarea textarea-bordered w-full"
+        required></textarea>
+    <button type="submit" class="btn btn-primary w-full">Enviar</button>
 </form>
