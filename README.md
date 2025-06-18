@@ -1,3 +1,4 @@
+# eliminar todo esto
 # Astro Starter Kit: Basics
 
 # Crear portafolio con astro
